@@ -1,13 +1,18 @@
 <template>
   <section id="omar-amirah" class="row center-align">
-		<div id="omar" class="name">
-			<span class="name-text">Omar</span>
-			<span class="name-highlight"></span>
+		<img class="background" src="@/assets/bg.svg">
+		<div class="border">
+			<div class="name">Omar</div>
+			<img class="diamond" src="@/assets/diamond-ring.svg" alt="diamond=ring" >
+			<div class="name">Amirah</div>
 		</div>
-		<img src="@/assets/diamond-ring.svg" alt="diamond=ring" >
-		<div id="amirah" class="name">
-			<span class="name-text">Amirah</span>
-			<span class="name-highlight"></span>
+		<div class="date">
+			<span>dec</span>
+			<span class="center">
+				<span>sun</span>
+				<span class="bold">27</span>
+			</span>
+			<span>2020</span>
 		</div>
   </section>
 </template>
@@ -22,69 +27,64 @@ export default {
 @import '@/main.scss';
 
 #omar-amirah {
-	margin-top: 2rem;
-	margin-bottom: 10rem;
+	margin: 3rem auto 0rem auto;
 	font-family: $welcomeFont;
 	color: $mainFontColor;
-	font-weight: 700;
-	padding: 0;
+	position: relative;
 
-	&::before{
-		content: ' ';
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    opacity: 0.2;
-    background-image: url('~@/assets/bg.png');
-    background-repeat: no-repeat;
-    background-position: 50% -12rem;
-    background-size: 80rem 45rem;
+	.background{
+		position: absolute;
+		top: -12rem;
+		left: -2rem;
+		z-index: -1;
+		width: 30rem;
+		transform: rotate(180deg);
+	}
+
+	.border{
+		margin: auto;
+		width: 270px;
+		height: 260px;
+		padding: 1rem;
 	}
 	.name{
-		position: relative;
-	}
-
-	.name-text{
-		display: block;
 		margin: auto;
-		padding: 2rem;
-		font-size: 4rem;
-		line-height: 0rem;
+		font-size: 40px;
 	}
-
-	.name-highlight{
-		display: block;
-		margin: auto;
-		background-color: $secondaryColor;
-		height: .5rem;
-	}
-
-	#omar{
-		.name-text{
-			width: 17rem;
-		}
-		.name-highlight{
-			width: 10rem;
-		}
-	}
-
-	#amirah{
-		.name-text{
-			width: 17rem;
-		}
-		.name-highlight{
-			width: 13rem;
-		}
-	}
-	img{
-		width: 4rem;
-		margin: 2rem;
+	.diamond{
+		width: 47px;
+		height: 47px;
+		margin: 1rem;
 		padding-top: 1rem;
+	}
+
+	.date{
+		margin: 2rem auto;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		span{
+			display: inline-block;
+			text-transform: uppercase;
+			width: 7rem;
+			font-size: 30px;
+			height: 100%;
+
+		}
+		.center {
+			border-left: 1px solid black;
+			border-right: 1px solid black;
+		}
+
+		.bold{
+			font-weight: 700;
+			font-size: 70px;
+			line-height: 3rem;
+		}
 	}
 }
 
+.border {
+	border: 4px solid white;
+}
 </style>
