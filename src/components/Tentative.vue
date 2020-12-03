@@ -5,9 +5,11 @@
         <span class="title">Atucara Majlis</span>
         <hr style="width: 15rem;margin-bottom: 2rem;">
         <ul class="left-align">
-          <li>8.30 pagi: Menerima Jemputan</li>
-          <li>9.00 pagi: Majlis Menghantar Berian & Akad Nikah</li>
-          <li>10.00 pagi: Membaca Doa Selamat & Menikmati Jamuan</li>
+          <li>11.00 - 11:30 am: Menerima Jemputan</li>
+          <li>11.30 - 12:15 am: Doa Selamat & Jamuan</li>
+          <li> 1:15 -  2:00 pm: Pengantin Lelaki Bertolak</li>
+          <li> 2:00 -  2:45 pm: Tunang & Nikah</li>
+          <li> 2:45 -  5:00 pm: Basuh Kaki & Sanding</li>
         </ul>
       </div>
       <div class="berharap">
@@ -51,6 +53,10 @@ export default {
     border: 1px solid black;
     padding: 1.5rem;
     margin-top: 3rem;
+  }
+
+  li{
+    margin: .5rem;
   }
 }
 </style>
