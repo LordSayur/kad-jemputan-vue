@@ -5,13 +5,7 @@
     
       <GroomAndBride class="animate__animated animate__fadeIn animate__delay-2s"/>
     
-      <Jemputan class='animate__animated animate__fadeInUp animate__delay-3s' :nama='nama' :kampong='kampong' :side='side'/>
-    
-      <section v-if="geng != ''" id="customMessage" class="row center-align">
-        <p>
-          {{ customMessage }}
-        </p>
-      </section>
+      <Jemputan class='animate__animated animate__fadeInUp animate__delay-3s' :nama='nama' :kampong='kampong' :side='side' :geng='geng'/>
       
       <Majlis class='animate__animated animate__fadeInUp animate__delay-4s' :side='side'/>
     
@@ -53,12 +47,7 @@ export default {
       nama: '',
       kampong: '',
       geng: '',
-      customMessage: '',
       side: '',
-      gengs: {
-        tahfiz: 'hello geng tapisssssss',
-        dymk: 'hello geng dynamiiiiik'
-      },
       title: '',
       content: '<p></p>'
     }
@@ -68,7 +57,6 @@ export default {
     this.kampong = this.$route.query.k || '';
     this.side = this.$route.query.s || 'omar'
     this.geng = this.$route.query.g || '';
-    this.customMessage = this.gengs[this.geng]
     this.getDataFromFB()
   },
   methods: {

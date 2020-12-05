@@ -8,6 +8,14 @@
     <span>{{nama}}</span>
     <span>{{kampong}}</span>
   </div>
+
+  <div v-if="geng != ''" id="customMessage" class="row center-align special-message">
+    <h6>Special Message</h6>
+    <p>
+      {{ customMessage }}
+    </p>
+  </div>
+
   <div class="hajat">
     <div class="jawi">
       <span>بِسْمِ اٌللَّهِ اٌلرَّحْمٰنِ اٌلرَحِيمِ</span>
@@ -21,9 +29,10 @@
 </template>
 
 <script>
+const fb = require('@/firebaseConfig.js')
 export default {
   name: "Jemputan",
-  props: ['nama', 'kampong', 'side'],
+  props: ['nama', 'kampong', 'side', 'geng'],
   data() {
     return {
       nameList: {
@@ -40,13 +49,29 @@ export default {
           'YM Awg Md Janai Bin Lampor & Dyg Rakiah Binti Mahren',
           'YM Awg Muhammad Amirul Bin Maidin'
         ]
-      }
+      },
+      customMessage: '',
+      gengs: {
+        tahfiz: '',
+        dymk: ''
+      },
     }
+  },
+  async created(){
+    await this.getDataFromFB()
   },
   computed: {
     names() {
       return this.nameList[this.side === 'omar' ? 'omar' : 'amirah']
     }
+  },
+  methods: {
+    async getDataFromFB() {
+      let documents = await fb.agendas.doc('F5XNcpXkHQTIKHWHcLXW').onSnapshot((document) => {
+        this.gengs = document.data().gengs;
+        this.customMessage = this.gengs[this.geng]
+      });
+    },
   }
 }
 </script>
@@ -81,6 +106,10 @@ export default {
   li{
     margin: 1rem auto;
   }
-  
+  .special-message{
+    margin: 1rem;
+    padding: 1.5rem;
+    border: 1px solid #d3d3d3;
+  }
 }
 </style>
