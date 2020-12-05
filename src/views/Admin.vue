@@ -3,11 +3,9 @@
     <h1>Admin</h1>
     <!-- Tentative -->
     <div class="row">
-      <hr>
-      <button :class="`btn ${isOmar ? 'active ' : 'btn-flat'}`" @click="isOmar = true">Omar</button>
-      <button :class="`btn ${isOmar ? 'btn-flat' : 'active '}`" @click="isOmar = false">Amirah</button>
-
       <h2>Tentative - {{ isOmar ? 'Omar' : 'Amirah'}}</h2>
+      <button :class="`btn ${isOmar ? 'active blue' : 'btn-flat'}`" @click="updateSide('omar')">Omar</button>
+      <button :class="`btn ${isOmar ? 'btn-flat' : 'active blue'}`" @click="updateSide('amirah')">Amirah</button><br><br>
       <div class='col s12'>
           <div v-for="(agenda, index) in Agendas" :key="index">
             <div class="row">
@@ -53,8 +51,10 @@
     <!-- URL Generator -->
     <div class="row">
       <h1>URL Generator</h1>
+      <button :class="`btn ${isOmar ? 'active blue' : 'btn-flat'}`" @click="updateSide('omar')">Omar</button>
+      <button :class="`btn ${isOmar ? 'btn-flat' : 'active blue'}`" @click="updateSide('amirah')">Amirah</button><br><br>
       <label>side</label>
-      <input v-model='side' type="text">
+      <input v-model='side' disabled type="text">
       <label>name (optional)</label>
       <input v-model='name' type="text">
       <label>kampong (optional)</label>
@@ -67,9 +67,9 @@
     </div>
     <!-- Makluman -->
     <div class="row">
-      <button :class="`btn ${isOmar ? 'active ' : 'btn-flat'}`" @click="isOmar = true">Omar</button>
-      <button :class="`btn ${isOmar ? 'btn-flat' : 'active '}`" @click="isOmar = false">Amirah</button>
       <h1>Makluman</h1>
+      <button :class="`btn ${isOmar ? 'active blue' : 'btn-flat'}`" @click="updateSide('omar')">Omar</button>
+      <button :class="`btn ${isOmar ? 'btn-flat' : 'active blue'}`" @click="updateSide('amirah')">Amirah</button><br><br>
       <label>Title</label>
       <input v-model="Makluman.title" type="text">
       <label>Content</label>
@@ -106,6 +106,10 @@ export default {
         let item2 = document.data().makluman;
         this.makluman = item2
       });
+    },
+    updateSide(side){
+      this.isOmar = side === 'omar'
+      this.side = side === 'omar' ? 'omar' : 'amirah'
     },
     deleteAgenda(index) {
       this.agendas[this.isOmar ? 'omar' : 'amirah'].splice(index, 1)
