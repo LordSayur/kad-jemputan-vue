@@ -4,13 +4,14 @@
       <div class="inner">
         <span class="title">Atucara Majlis</span>
         <hr style="width: 15rem;margin-bottom: 2rem;">
-        <ul class="left-align">
+        <Agenda v-for="(agenda, index) in Agendas" :key="index" :agenda='agenda' />
+        <!-- <ul class="left-align">
           <li>11.00 - 11:30 am: Menerima Jemputan</li>
           <li>11.30 - 12:15 am: Doa Selamat & Jamuan</li>
           <li> 1:15 -  2:00 pm: Pengantin Lelaki Bertolak</li>
           <li> 2:00 -  2:45 pm: Tunang & Nikah</li>
           <li> 2:45 -  5:00 pm: Basuh Kaki & Sanding</li>
-        </ul>
+        </ul> -->
       </div>
       <div class="berharap">
         <span>Wakil yang Berharap</span>
@@ -20,8 +21,80 @@
 </template>
 
 <script>
+import Agenda from './Agenda'
 export default {
-  name: 'Tentative'
+  name: 'Tentative',
+  components: { Agenda},
+  props: {
+    side: {
+      default: 'omar'
+    }
+  },
+  data() {
+    return{
+      agendas: {
+        omar: [
+          {
+            time: '11.00',
+            period: 'am',
+            agenda: 'Menerima Jemputan'
+          },
+          {
+            time: '11.30',
+            period: 'am',
+            agenda: 'Doa Selamat & Jamuan'
+          },
+          {
+            time: '1:15',
+            period: 'pm',
+            agenda: 'Pengantin Lelaki Bertolak'
+          },
+          {
+            time: '2:00',
+            period: 'pm',
+            agenda: 'Tunang & Nikah'
+          },
+          {
+            time: '2:45',
+            period: 'pm',
+            agenda: 'Basuh Kaki & Sanding'
+          },
+        ],
+        amirah: [
+          {
+            time: '11.00',
+            period: 'am',
+            agenda: 'Menerima Jemputan Amirah'
+          },
+          {
+            time: '11.30',
+            period: 'am',
+            agenda: 'Doa Selamat & Jamuan'
+          },
+          {
+            time: '1:15',
+            period: 'pm',
+            agenda: 'Pengantin Lelaki Bertolak'
+          },
+          {
+            time: '2:00',
+            period: 'pm',
+            agenda: 'Tunang & Nikah'
+          },
+          {
+            time: '2:45',
+            period: 'pm',
+            agenda: 'Basuh Kaki & Sanding'
+          },
+        ],
+      }
+    }
+  },
+  computed:{
+    Agendas() {
+      return this.agendas[this.side === 'omar' ? 'omar' : 'amirah']
+    }
+  }
 }
 </script>
 

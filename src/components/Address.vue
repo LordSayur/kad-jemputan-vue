@@ -22,10 +22,14 @@
 <script>
 export default {
   name: "Address",
+  props: ['side'],
   data(){
     return {
       isOmar: true
     }
+  },
+  created(){
+    this.isOmar = this.side === 'omar'
   }
 }
 </script>

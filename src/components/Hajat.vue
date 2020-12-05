@@ -12,7 +12,8 @@
       <div class="waktu">
         <p>Pada Hari Ahad</p>
         <p>27 December 2020M / 13 Syawal 1438H</p>
-        <p>Bertempat Di nombor 15, simpang 73, jalan 60, Perumahan Kampong Rimba, Gadong</p>
+        <p v-if="side === 'omar'"> Bertempat Di nombor 15, simpang 73, jalan 60, Perumahan Kampong Rimba, Gadong</p>
+        <p v-if="side === 'amirah'">Bertempat Di unit A1, simpang 333, Kampong Serambangun, Tutong</p>
       </div>
     </section>
 </template>
@@ -20,6 +21,7 @@
 <script>
 export default {
   name: "Hajat",
+  props: ['side']
 }
 </script>
 

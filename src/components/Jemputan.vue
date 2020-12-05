@@ -5,7 +5,7 @@
     <span class="title">Undangan Majlis Perkahwinan</span>
     <hr style="width: 15rem;margin-bottom: 2rem;">
     <span>Yang Mulia,</span>
-    <span>{{namaJemputan}}</span>
+    <span>{{nama}}</span>
     <span>{{kampong}}</span>
   </div>
   <div class="hajat">
@@ -14,11 +14,7 @@
       <span>يا قاضى الحاجاة</span>
     </div>
     <ul>
-      <li>Dr. Haji Ibrahim Bin Haji Abdul Rahman
-      </li>
-      <li>Hajah Siti Fatimah Binti Haji Mohd. Salleh</li>
-      <li>Maidin bin Lampoh</li>
-      <li>Hamizah binti Abdullah @ corpin</li>
+      <li v-for="name in names" :key="name">{{ name }}</li>
     </ul>
   </div>
 </section>
@@ -27,15 +23,30 @@
 <script>
 export default {
   name: "Jemputan",
+  props: ['nama', 'kampong', 'side'],
   data() {
     return {
-      namaJemputan: '',
-      kampong: 'Rimba'
+      nameList: {
+        omar: [
+          'Dr Haji Ibrahim Bin Haji Abdul Rahman',
+          'Hajah Siti Fatimah Binti Haji Mohd. Salleh',
+          'Mohd Aslam Bin Dr Hj Ibrahim & Isteri',
+          'Mohd Zaki Bin Dr Hj Ibrahim & Isteri',
+          'Mohd Yaasir Bin Dr Hj Ibrahim & Isteri'
+        ],
+        amirah: [
+          'YM Ayahanda Awg Maidin Bin Lampoh',
+          'YM Ibunda Dyg Hamizah Binti Abdullah',
+          'YM Awg Md Janai Bin Lampor & Dyg Rakiah Binti Mahren',
+          'YM Awg Muhammad Amirul Bin Maidin'
+        ]
+      }
     }
   },
-  created(){
-    this.namaJemputan = this.$route.query.nama || 'Awang Omar bin Haji Ibrahim';
-    this.kampong = this.$route.query.kampong || 'Rimba';
+  computed: {
+    names() {
+      return this.nameList[this.side === 'omar' ? 'omar' : 'amirah']
+    }
   }
 }
 </script>
