@@ -16,6 +16,9 @@
 
     <Tentative class='animate__animated animate__fadeInUp animate__delay-4s' :side="side"/>
 
+      <h5>{{ title }}</h5>
+      <div v-html='content' style="margin-bottom: 3rem;"></div>
+    
     <Address class='animate__animated animate__fadeInUp animate__delay-4s' :side='side'/>
     
   </div>
@@ -28,6 +31,8 @@ import Jemputan from '@/components/Jemputan.vue'
 import Majlis from '@/components/Hajat.vue'
 import Tentative from '@/components/Tentative.vue'
 import Address from '@/components/Address.vue'
+
+const fb = require('@/firebaseConfig.js')
 
 export default {
   name: 'Home',
@@ -50,14 +55,27 @@ export default {
         tahfiz: 'hello geng tapisssssss',
         dymk: 'hello geng dynamiiiiik'
       },
+      title: '',
+      content: '<p></p>'
     }
   },
   created(){
-    this.nama = this.$route.query.n || 'Awang Omar bin Haji Ibrahim';
-    this.kampong = this.$route.query.k || 'Rimba';
-    this.side = this.$route.query.s
-    this.geng = this.$route.query.geng || '';
+    this.nama = this.$route.query.n || '';
+    this.kampong = this.$route.query.k || '';
+    this.side = this.$route.query.s || 'omar'
+    this.geng = this.$route.query.g || '';
     this.customMessage = this.gengs[this.geng]
+    this.getDataFromFB()
+  },
+  methods: {
+    async getDataFromFB() {
+      let documents = await fb.agendas.doc('F5XNcpXkHQTIKHWHcLXW').onSnapshot((document) => {
+        let item = document.data().makluman;
+        let makluman = item[this.side === 'omar' ? 'omar' : 'amirah']
+        this.title = makluman.title;
+        this.content = makluman.content;
+      });
+    },
   }
 }
 </script>
