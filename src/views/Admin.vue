@@ -71,9 +71,9 @@
       <button :class="`btn ${isOmar ? 'btn-flat' : 'active '}`" @click="isOmar = false">Amirah</button>
       <h1>Makluman</h1>
       <label>Title</label>
-      <input v-model="makluman[isOmar ? 'omar': 'amirah'].title" type="text">
+      <input v-model="Makluman.title" type="text">
       <label>Content</label>
-      <input v-model="makluman[isOmar ? 'omar': 'amirah'].content" type="text">
+      <input v-model="Makluman.content" type="text">
       <button :class="`btn`" @click="updateDb()"  :disabled='buttonDisabled' style="margin-left: 1rem;">Update to Database</button>
       <div v-show="isShow">
         <span>Are you sure?</span>
@@ -100,7 +100,7 @@ export default {
   },
   methods: {
     async getDataFromFB() {
-      let documents = await fb.agendas.doc('F5XNcpXkHQTIKHWHcLXW').onSnapshot((document) => {
+      fb.agendas.doc('F5XNcpXkHQTIKHWHcLXW').onSnapshot((document) => {
         let item1 = document.data().agendas;
         this.agendas = item1
         let item2 = document.data().makluman;
@@ -182,7 +182,10 @@ export default {
       name: 'omar',
       kampong: 'Rimba',
       geng: '',
-      makluman: null,
+      makluman: {
+        omar: [],
+        amirah: []
+      },
       title: '',
       content: ''
     }
@@ -190,6 +193,9 @@ export default {
   computed:{
     Agendas(){
       return this.isOmar ? this.agendas.omar : this.agendas.amirah
+    },
+    Makluman(){
+      return this.isOmar ? this.makluman.omar : this.makluman.amirah
     },
     generateUrl(){
       return `http://omar-amirah.netlify.app/?s=${this.side}${this.name ? '&n=' + encodeURIComponent(this.name) : ''}${this.kampong ? '&k='+ encodeURIComponent(this.kampong) : ''}${this.geng ? '&g='+ encodeURIComponent(this.geng) : ''}`
