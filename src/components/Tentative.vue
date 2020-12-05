@@ -2,16 +2,9 @@
   <section id="tentative" class="row center-align hide-behind">
       <img class="background" src="@/assets/bg.svg">
       <div class="inner">
-        <span class="title">Atucara Majlis</span>
+        <span class="title">Atucara Majlis</span><span class="live">Live Update</span>
         <hr style="width: 15rem;margin-bottom: 2rem;">
         <Agenda v-for="(agenda, index) in Agendas" :key="index" :agenda='agenda' />
-        <!-- <ul class="left-align">
-          <li>11.00 - 11:30 am: Menerima Jemputan</li>
-          <li>11.30 - 12:15 am: Doa Selamat & Jamuan</li>
-          <li> 1:15 -  2:00 pm: Pengantin Lelaki Bertolak</li>
-          <li> 2:00 -  2:45 pm: Tunang & Nikah</li>
-          <li> 2:45 -  5:00 pm: Basuh Kaki & Sanding</li>
-        </ul> -->
       </div>
       <div class="berharap">
         <span>Wakil yang Berharap</span>
@@ -37,54 +30,64 @@ export default {
           {
             time: '11.00',
             period: 'am',
-            agenda: 'Menerima Jemputan'
+            agenda: 'Menerima Jemputan',
+            status: 'todo'
           },
           {
             time: '11.30',
             period: 'am',
-            agenda: 'Doa Selamat & Jamuan'
+            agenda: 'Doa Selamat & Jamuan',
+            status: 'todo'
           },
           {
             time: '1:15',
             period: 'pm',
-            agenda: 'Pengantin Lelaki Bertolak'
+            agenda: 'Pengantin Lelaki Bertolak',
+            status: 'todo'
           },
           {
             time: '2:00',
             period: 'pm',
-            agenda: 'Tunang & Nikah'
+            agenda: 'Tunang & Nikah',
+            status: 'todo'
           },
           {
             time: '2:45',
             period: 'pm',
-            agenda: 'Basuh Kaki & Sanding'
+            agenda: 'Basuh Kaki & Sanding',
+            status: 'todo'
           },
         ],
         amirah: [
           {
             time: '11.00',
             period: 'am',
-            agenda: 'Menerima Jemputan Amirah'
+            agenda: 'Menerima Jemputan Amirah',
+            status: 'done'
           },
           {
             time: '11.30',
             period: 'am',
-            agenda: 'Doa Selamat & Jamuan'
+            agenda: 'Doa Selamat & Jamuan',
+            status: 'done'
           },
           {
             time: '1:15',
             period: 'pm',
-            agenda: 'Pengantin Lelaki Bertolak'
+            agenda: 'Pengantin Lelaki Bertolak',
+            status: 'currently'
           },
           {
             time: '2:00',
             period: 'pm',
-            agenda: 'Tunang & Nikah'
+            agenda: 'Tunang & Nikah',
+            status: 'todo'
           },
           {
             time: '2:45',
             period: 'pm',
-            agenda: 'Basuh Kaki & Sanding'
+            agenda: 'Basuh Kaki & Sanding',
+            status: 'todo'
           },
         ],
       }
@@ -117,8 +120,21 @@ export default {
   span{
     display: block;
     &.title {
+      display: inline-block;
       font-weight: 700;
       font-size: 20px;
+    }
+    &.live {
+      display: inline-block;
+      background-color:yellowgreen;
+      color: white;
+      margin-left: 1rem;
+      padding: .3rem;
+      border-radius: .5rem;
+      font-size: 10px;
+      -webkit-animation: glow 0.5s ease-in-out infinite alternate;
+      -moz-animation: glow 0.5s ease-in-out infinite alternate;
+      animation: glow 0.5s ease-in-out infinite alternate;
     }
   }
 
@@ -130,6 +146,16 @@ export default {
 
   li{
     margin: .5rem;
+  }
+}
+@-webkit-keyframes glow {
+  from {
+      background-color:yellowgreen;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+  }
+  to {
+      background-color:greenyellow;
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
   }
 }
 </style>
