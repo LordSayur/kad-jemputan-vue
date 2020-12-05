@@ -8,31 +8,31 @@
       <button :class="`btn ${isOmar ? 'btn-flat' : 'active '}`" @click="isOmar = false">Amirah</button>
 
       <h2>Tentative - {{ isOmar ? 'Omar' : 'Amirah'}}</h2>
-      <div class="col s12">
-        <ul class="tabs">
-        </ul>
+      <div class='col s12'>
+          <div v-for="(agenda, index) in Agendas" :key="index">
+            <div class="row">
+              <div class="col s12">
+                <textarea class="materialize-textarea" v-model="agenda.agenda"></textarea>
+              </div>
+              <div  class="col s12 myFlex">
+                <input v-model="agenda.time" type="text">
+                <select v-model="agenda.period" style="display: block">
+                  <option value="" disabled selected>Choose Status</option>
+                  <option value="am">am</option>
+                  <option value="pm">pm</option>
+                </select>
+                <select v-model="agenda.status" style="display: block">
+                  <option value="" disabled selected>Choose Status</option>
+                  <option value="todo">Todo</option>
+                  <option value="currently">Current</option>
+                  <option value="done">Done</option>
+                </select>
+                <button :class="`btn red`" @click="deleteAgenda(index)"  :disabled='buttonDisabled'>X</button>
+              </div>
+              <div class="teal" style="height: 3px"></div>
+            </div>
+          </div>
       </div>
-      <table class=''>
-        <thead>
-          <tr>
-              <th>Time</th>
-              <th>Period</th>
-              <th>Agenda</th>
-              <th>Status</th>
-              <th>Delete</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr v-for="(agenda, index) in Agendas" :key="index">
-            <td><input v-model="agenda.time" type="text"></td>
-            <td><input v-model="agenda.period" type="text"></td>
-            <td><input v-model="agenda.agenda" type="text"></td>
-            <td><input v-model="agenda.status" type="text"></td>
-            <td><button :class="`btn red`" @click="deleteAgenda(index)"  :disabled='buttonDisabled'>Delete</button></td>
-          </tr>
-        </tbody>
-      </table>
       <div style="margin: 1rem auto">
         <button :class="`btn`" @click="addAgenda()" :disabled='buttonDisabled'>Add New</button>
         <button :class="`btn`" @click="updateDb()"  :disabled='buttonDisabled' style="margin-left: 1rem;">Update to Database</button>
@@ -206,4 +206,7 @@ export default {
 
 <style lang='scss'>
 @import '@/main.scss';
+.myFlex {
+  display: flex;
+}
 </style>
