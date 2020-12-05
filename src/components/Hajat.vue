@@ -5,9 +5,9 @@
       <span class="title">Majlis  menghantar Berian, Akad Nikah Dan Doa Selamat</span>
       <hr style="width: 15rem;margin-bottom: 2rem;">
       <div class="name">
-        <span>Mohammad Omar bin Dr. Haji Ibrahim</span>
-        <span>&</span>
-        <span>Nurul Amirah binti Maidin</span>
+        <span class="bold">Mohammad Omar bin Dr. Haji Ibrahim</span>
+        <span class="bold">&</span>
+        <span class="bold">Nurul Amirah binti Maidin</span>
       </div>
       <div class="waktu">
         <p>Pada Hari Ahad</p>
@@ -47,6 +47,10 @@ export default {
       font-weight: 700;
       font-size: 20px;
     }
+  }
+
+  .bold {
+    font-weight: 700;
   }
 
 }
