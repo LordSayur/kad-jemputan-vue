@@ -4,7 +4,7 @@
 
     <GroomAndBride class="animate__animated animate__fadeIn animate__delay-2s"/>
 
-    <Jemputan class='animate__animated animate__fadeInUp animate__delay-3s'/>
+    <Jemputan class='animate__animated animate__fadeInUp animate__delay-3s' :nama='nama' :kampong='kampong' :side='side'/>
 
     <section v-if="geng != ''" id="customMessage" class="row center-align">
       <p>
@@ -12,11 +12,11 @@
       </p>
     </section>
     
-    <Majlis class='animate__animated animate__fadeInUp animate__delay-4s'/>
+    <Majlis class='animate__animated animate__fadeInUp animate__delay-4s' :side='side'/>
 
-    <Tentative class='animate__animated animate__fadeInUp animate__delay-4s'/>
+    <Tentative class='animate__animated animate__fadeInUp animate__delay-4s' :side="side"/>
 
-    <Address class='animate__animated animate__fadeInUp animate__delay-4s'/>
+    <Address class='animate__animated animate__fadeInUp animate__delay-4s' :side='side'/>
     
   </div>
 </template>
@@ -41,8 +41,11 @@ export default {
   },
   data() {
     return {
+      nama: '',
+      kampong: '',
       geng: '',
       customMessage: '',
+      side: '',
       gengs: {
         tahfiz: 'hello geng tapisssssss',
         dymk: 'hello geng dynamiiiiik'
@@ -50,6 +53,9 @@ export default {
     }
   },
   created(){
+    this.nama = this.$route.query.n || 'Awang Omar bin Haji Ibrahim';
+    this.kampong = this.$route.query.k || 'Rimba';
+    this.side = this.$route.query.s
     this.geng = this.$route.query.geng || '';
     this.customMessage = this.gengs[this.geng]
   }
