@@ -14,6 +14,7 @@
 </template>
 
 <script>
+const fb = require("@/firebaseConfig.js");
 import Agenda from './Agenda'
 export default {
   name: 'Tentative',
@@ -91,6 +92,18 @@ export default {
           },
         ],
       }
+    }
+  },
+  async created(){
+    this.getDataFromFB()
+  },
+  methods: {
+    async getDataFromFB() {
+      console.log(fb)
+      let documents = await fb.agendas.doc('F5XNcpXkHQTIKHWHcLXW').onSnapshot((document) => {
+        let item = document.data().agendas;
+        this.agendas = item
+      });
     }
   },
   computed:{
