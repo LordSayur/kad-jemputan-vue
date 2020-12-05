@@ -152,7 +152,7 @@ export default {
   }
 
   .berharap {
-    border: 1px solid black;
+    border: 1px solid #d3d3d3;
     padding: 1.5rem;
     margin-top: 3rem;
   }
