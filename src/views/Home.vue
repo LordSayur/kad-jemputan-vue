@@ -11,14 +11,19 @@
     
       <Tentative class='animate__animated animate__fadeInUp animate__delay-4s' :side="side"/>
     
-      <h5>{{ title }}</h5>
-      <div v-html='content' style="margin-bottom: 3rem;"></div>
+      <!-- Makluman -->
+      <div class='animate__animated animate__fadeInUp animate__delay-4s'>
+        <h5>{{ title }}</h5>
+        <div v-html='content' style="margin-bottom: 3rem;"></div>
+      </div>
     
       <Address class='animate__animated animate__fadeInUp animate__delay-4s' :side='side'/>
     </div>
 
-    <h6 style="text-align: center;text-decoration: underline;margin-bottom: 1rem;"><a href="https://wsb.netlify.app/">Waktu Sembahyang Brunei</a></h6>
-    <iframe src="https://wsb.netlify.app/" style="height: 35rem; width: 100%" frameborder="0"></iframe>
+    <div class='animate__animated animate__fadeInUp animate__delay-4s'>
+      <h6 style="text-align: center;text-decoration: underline;margin-bottom: 1rem;"><a href="https://wsb.netlify.app/">Waktu Sembahyang Brunei</a></h6>
+      <iframe src="https://wsb.netlify.app/" style="height: 35rem; width: 100%" frameborder="0"></iframe>
+    </div>
   </div>
 </template>
 
