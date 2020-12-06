@@ -3,6 +3,12 @@
     <div class="home">
       <!-- <P5Background/> -->
     
+      <!-- Shortcut -->
+      <div>
+        <a class="shortcut majlis animate__animated animate__fadeInLeft animate__delay-4s" href="#majlis">LIVE!</a>
+        <a class="shortcut address animate__animated animate__fadeInLeft animate__delay-5s" href="#address"><i class="material-icons">location_on</i></a>
+      </div>
+    
       <GroomAndBride class="animate__animated animate__fadeIn animate__delay-2s"/>
     
       <Jemputan class='animate__animated animate__fadeInUp animate__delay-3s' :nama='nama' :kampong='kampong' :side='side' :geng='geng'/>
@@ -87,6 +93,7 @@ body {
   margin: auto;
   padding: 2rem;
   max-width: 30rem;
+  position: relative;
 }
 .p5Canvas {
   width: 100% !important;
@@ -94,5 +101,24 @@ body {
 	top: 0%;
 	left: 0%;
 	z-index: -30;
+}
+.shortcut {
+  z-index: 100;
+  position: fixed;
+  left: 0;
+  padding: .5rem;
+  margin: 0;
+  border: 1px solid lightgray;
+  color: black;
+  background-color:white;
+  opacity: .5;
+  &.majlis {
+    bottom: 5rem;
+    font-weight: 700;
+  }
+  &.address {
+    bottom: 8.5rem;
+  }
+
 }
 </style>
