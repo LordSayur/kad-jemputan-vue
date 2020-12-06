@@ -99,7 +99,6 @@ export default {
   },
   methods: {
     async getDataFromFB() {
-      console.log(fb)
       let documents = await fb.agendas.doc('F5XNcpXkHQTIKHWHcLXW').onSnapshot((document) => {
         let item = document.data().agendas;
         this.agendas = item
