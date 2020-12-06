@@ -52,9 +52,12 @@ export default {
       },
       customMessage: '',
       gengs: {
-        tahfiz: '',
-        dymk: ''
-      },
+        omar: [
+          {}
+        ],
+        amirah: [{}
+        ]
+      }
     }
   },
   async created(){
@@ -69,9 +72,15 @@ export default {
     async getDataFromFB() {
       let documents = await fb.agendas.doc('F5XNcpXkHQTIKHWHcLXW').onSnapshot((document) => {
         this.gengs = document.data().gengs;
-        this.customMessage = this.gengs[this.geng]
+        this.updateCustomMessage();
       });
     },
+    updateCustomMessage(){
+      let myGang = this.gengs[this.side].filter(g => g.id === this.geng)
+      if (myGang.length > 0) {
+        this.customMessage = myGang[0].msg
+      }
+    }
   }
 }
 </script>
