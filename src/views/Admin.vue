@@ -1,11 +1,20 @@
 <template>
   <div class="container">
     <h1>Admin</h1>
-    <!-- Tentative -->
-    <div class="row">
-      <h2>Tentative - {{ isOmar ? 'Omar' : 'Amirah'}}</h2>
+    <div>
       <button :class="`btn ${isOmar ? 'active blue' : 'btn-flat'}`" @click="updateSide('omar')">Omar</button>
-      <button :class="`btn ${isOmar ? 'btn-flat' : 'active blue'}`" @click="updateSide('amirah')">Amirah</button><br><br>
+      <button :class="`btn ${isOmar ? 'btn-flat' : 'active blue'}`" @click="updateSide('amirah')">Amirah</button>
+    </div>
+    <div>
+      <br>
+      <button :class="`btn ${show.Tentative ? 'active blue' : 'btn-flat'}`" @click="updateTab('Tentative')">Tentative</button>
+      <button :class="`btn ${show.UrlGen ? 'active blue' : 'btn-flat'}`" @click="updateTab('UrlGen')">URL Generator</button>
+      <button :class="`btn ${show.Makluman ? 'active blue' : 'btn-flat'}`" @click="updateTab('Makluman')">Makluman</button>
+      <button :class="`btn ${show.Gengs ? 'active blue' : 'btn-flat'}`" @click="updateTab('Gengs')">Gengs</button>
+    </div>
+    <!-- Tentative -->
+    <div class="row" v-show="show.Tentative">
+      <h2>Tentative - {{ isOmar ? 'Omar' : 'Amirah'}}</h2>
       <div class='col s12'>
           <div v-for="(agenda, index) in Agendas" :key="index">
             <div class="row">
@@ -49,10 +58,8 @@
       </div>
     </div>
     <!-- URL Generator -->
-    <div class="row">
+    <div class="row" v-show="show.UrlGen">
       <h1>URL Generator</h1>
-      <button :class="`btn ${isOmar ? 'active blue' : 'btn-flat'}`" @click="updateSide('omar')">Omar</button>
-      <button :class="`btn ${isOmar ? 'btn-flat' : 'active blue'}`" @click="updateSide('amirah')">Amirah</button><br><br>
       <label>side</label>
       <input v-model='side' disabled type="text">
       <label>name (optional)</label>
@@ -69,10 +76,8 @@
       <button @click="copy" class="btn">Copy</button>
     </div>
     <!-- Makluman -->
-    <div class="row">
+    <div class="row" v-show="show.Makluman">
       <h1>Makluman</h1>
-      <button :class="`btn ${isOmar ? 'active blue' : 'btn-flat'}`" @click="updateSide('omar')">Omar</button>
-      <button :class="`btn ${isOmar ? 'btn-flat' : 'active blue'}`" @click="updateSide('amirah')">Amirah</button><br><br>
       <label>Title</label>
       <input v-model="Makluman.title" type="text">
       <label>Content</label>
@@ -92,11 +97,8 @@
       </div>
     </div>
     <!-- gengs -->
-    <div class="row">
+    <div class="row" v-show="show.Gengs">
       <h1>Gengs</h1>
-      <button :class="`btn ${isOmar ? 'active blue' : 'btn-flat'}`" @click="updateSide('omar')">Omar</button>
-      <button :class="`btn ${isOmar ? 'btn-flat' : 'active blue'}`" @click="updateSide('amirah')">Amirah</button><br><br>
-
       <div v-for="(geng, index) in Gengs" :key='index' class="myFlex">
         <div>
           <label>Geng ID</label>
@@ -200,6 +202,16 @@ export default {
       document.execCommand('copy')
       console.log(copyText.value)
     },
+    updateTab(tab) {
+      this.show = {
+        Tentative: false,
+        UrlGen: false,
+        Makluman: false,
+        Gengs: false,
+      }
+
+      this.show[tab] = true;
+    }
   },
   data() {
     return {
@@ -252,6 +264,12 @@ export default {
             msg: 'Hello Geng chung-ching'
           }
         ]
+      },
+      show: {
+        Tentative: true,
+        UrlGen: false,
+        Makluman: false,
+        Gengs: false,
       }
     }
   },
