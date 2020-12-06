@@ -4,6 +4,9 @@
       <div class="inner"></div>
       <span class="title">Majlis  menghantar Berian, Akad Nikah Dan Doa Selamat</span>
       <hr style="width: 15rem;margin-bottom: 2rem;">
+      <p>
+        Dengan penuh hormat dan takzim sukacita menjunjung Pengiran / mempersilakan Pehin / Dato / Datin / Awang / Dayang hadir ke majlis tersebut di atas bagi / anakanda / adinda / kakanda / peramba / kaola / kami:
+      </p>
       <div class="name">
         <span class="bold">Mohammad Omar bin Dr. Haji Ibrahim</span>
         <span class="bold">&</span>
