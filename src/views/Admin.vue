@@ -59,8 +59,11 @@
       <input v-model='name' type="text">
       <label>kampong (optional)</label>
       <input v-model='kampong' type="text">
-      <label>geng (optional</label>
-      <input v-model='geng' type="text">
+      <label>geng (optional)</label>
+      <select v-model="geng" style="display: block">
+        <option value="" disabled selected>Choose Geng</option>
+        <option v-for="geng in gengs[side]" :key="geng.id" :value="geng.id">{{ geng.id }}</option>
+      </select>
       <label>URL</label>
       <input v-model='generateUrl' id='url' type="text">
       <button @click="copy" class="btn">Copy</button>
@@ -74,6 +77,44 @@
       <input v-model="Makluman.title" type="text">
       <label>Content</label>
       <input v-model="Makluman.content" type="text">
+      <button :class="`btn`" @click="updateDb()"  :disabled='buttonDisabled' style="margin-left: 1rem;">Update to Database</button>
+      <div v-show="isShow">
+        <span>Are you sure?</span>
+        <div style="margin: 1rem auto">
+          <button :class="`btn btn-small blue`" @click="upload()">Yes</button>
+          <button :class="`btn btn-small red`" @click="CancelUpdate" style="margin-left: 1rem;">No</button>
+        </div>
+      </div>
+      <div>
+        <p v-show="isUpdateCancelled" class="red-text">Update Cancelled!</p>
+        <p v-show="isUpdating" class="blue-text">Updating...</p>
+        <p v-show="isUpdated" class="green-text">Updated!</p>
+      </div>
+    </div>
+    <!-- gengs -->
+    <div class="row">
+      <h1>Gengs</h1>
+      <button :class="`btn ${isOmar ? 'active blue' : 'btn-flat'}`" @click="updateSide('omar')">Omar</button>
+      <button :class="`btn ${isOmar ? 'btn-flat' : 'active blue'}`" @click="updateSide('amirah')">Amirah</button><br><br>
+
+      <div v-for="(geng, index) in Gengs" :key='index' class="myFlex">
+        <div>
+          <label>Geng ID</label>
+          <input v-model="geng.id" type="text" >
+        </div>
+        <div>
+          <label>Geng Name</label>
+          <input v-model="geng.name" type="text" >
+        </div>
+        <div>
+          <label>Special Message</label>
+          <textarea v-model="geng.msg" cols="30" rows="10"></textarea>
+        </div>
+        <div>
+          <button :class="`btn red`" @click="deleteGeng(index)"  :disabled='buttonDisabled'>X</button>
+        </div>
+      </div>
+      <button class="btn" @click="addGeng(gengs[side].push({id,name,msg}))">Add</button>
       <button :class="`btn`" @click="updateDb()"  :disabled='buttonDisabled' style="margin-left: 1rem;">Update to Database</button>
       <div v-show="isShow">
         <span>Are you sure?</span>
@@ -112,7 +153,10 @@ export default {
       this.side = side === 'omar' ? 'omar' : 'amirah'
     },
     deleteAgenda(index) {
-      this.agendas[this.isOmar ? 'omar' : 'amirah'].splice(index, 1)
+      this.agendas[this.side].splice(index, 1)
+    },
+    deleteGeng(index) {
+      this.gengs[this.side].splice(index, 1)
     },
     addAgenda() {
       this.agendas[this.isOmar ? 'omar' : 'amirah'].push({
@@ -132,7 +176,8 @@ export default {
       this.buttonDisabled = true;
       await fb.agendas.doc('F5XNcpXkHQTIKHWHcLXW').set({
         agendas: this.agendas,
-        makluman: this.makluman
+        makluman: this.makluman,
+        gengs: this.gengs
       })
       this.isUpdating = false;
       this.buttonDisabled = false;
@@ -191,7 +236,23 @@ export default {
         amirah: []
       },
       title: '',
-      content: ''
+      content: '',
+      gengs: {
+        omar: [
+          {
+            id: 'tahfiz',
+            name: 'Rakan Tahfiz',
+            msg: 'Hello Geng Tahfiz'
+          }
+        ],
+        amirah: [
+          {
+            id: 'chung-ching',
+            name: 'Rakan chung-ching',
+            msg: 'Hello Geng chung-ching'
+          }
+        ]
+      }
     }
   },
   computed:{
@@ -200,6 +261,9 @@ export default {
     },
     Makluman(){
       return this.isOmar ? this.makluman.omar : this.makluman.amirah
+    },
+    Gengs(){
+      return this.isOmar ? this.gengs.omar : this.gengs.amirah
     },
     generateUrl(){
       return `http://omar-amirah.netlify.app/?s=${this.side}${this.name ? '&n=' + encodeURIComponent(this.name) : ''}${this.kampong ? '&k='+ encodeURIComponent(this.kampong) : ''}${this.geng ? '&g='+ encodeURIComponent(this.geng) : ''}`
@@ -212,5 +276,6 @@ export default {
 @import '@/main.scss';
 .myFlex {
   display: flex;
+  justify-content: space-evenly;
 }
 </style>
