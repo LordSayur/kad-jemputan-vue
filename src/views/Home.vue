@@ -2,7 +2,14 @@
   <div>
     <div class="home">
       <!-- <P5Background/> -->
-    
+
+      <!-- Banner -->
+      <div id='banner' :class="`sticky animate__animated animate__fadeInDown ${showBanner? 'showBanner' : ''}`">
+        <span>Omar</span>
+        <img src="@/assets/diamond-ring.svg" alt="diamond=ring" >
+        <span>Amirah</span>
+      </div>
+
       <!-- Shortcut -->
       <div>
         <a class="shortcut majlis animate__animated animate__fadeInLeft animate__delay-4s" href="#majlis">LIVE!</a>
@@ -60,7 +67,8 @@ export default {
       geng: '',
       side: '',
       title: '',
-      content: '<p></p>'
+      content: '<p></p>',
+      showBanner: false
     }
   },
   created(){
@@ -69,6 +77,16 @@ export default {
     this.side = this.$route.query.s || 'omar'
     this.geng = this.$route.query.g || '';
     this.getDataFromFB()
+  },
+  mounted(){
+    let header = document.getElementById('banner')
+    window.onscroll = function() {
+      if (window.pageYOffset > 500) {
+        header.classList.add("showBanner");
+      } else {
+        header.classList.remove("showBanner");
+      }
+    };
   },
   methods: {
     async getDataFromFB() {
@@ -120,5 +138,27 @@ body {
     bottom: 8.5rem;
   }
 
+}
+.sticky{
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 3rem;
+  background-color: white;
+  color: black;
+  z-index: 100;
+  opacity: .9;
+  display: none;
+  &.showBanner{
+    display: flex;
+  }
+  img{
+    width: 2rem;
+    margin: 0 1rem;
+  }
 }
 </style>
