@@ -94,7 +94,7 @@ $line:3px;
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: lightgrey;
+    // background-color: lightgrey;
   }
 
   &.highlight-done {
