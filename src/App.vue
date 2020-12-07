@@ -6,6 +6,9 @@
 
 <style lang="scss">
 @import '@/main.scss';
+html {
+  scroll-behavior: smooth;
+}
 body{
   margin: 0;
 }

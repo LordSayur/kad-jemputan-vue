@@ -12,7 +12,7 @@
 
       <!-- Shortcut -->
       <div>
-        <a class="shortcut majlis animate__animated animate__fadeInLeft animate__delay-4s" href="#majlis">LIVE!</a>
+        <a class="shortcut majlis animate__animated animate__fadeInLeft animate__delay-4s" href="#tentative">LIVE!</a>
         <a class="shortcut address animate__animated animate__fadeInLeft animate__delay-5s" href="#address"><i class="material-icons">location_on</i></a>
       </div>
     
