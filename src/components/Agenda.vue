@@ -86,30 +86,15 @@ $line:3px;
   margin-left: 60px;
   border-radius: .5rem;
   padding: .3rem;
-  &::before {
-    content: '';
-    position: absolute;
-    right: 235px;
-    top: 46%;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    // background-color: lightgrey;
-  }
 
   &.highlight-done {
     color: lightgrey;
-    &::before {
-      background-color: lightgray;
-    }
   }
 
   &.highlight-currently {
-    background-color: #ffece6;
-    color: #858585;
-    &::before {
-      background-color:  #f9c3b3;
-    }
+    background-color: #f9c3b3;
+    // color: #858585;
+    color: white;
   }
 }
 </style>
