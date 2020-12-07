@@ -148,6 +148,8 @@ export default {
         this.agendas = item1
         let item2 = document.data().makluman;
         this.makluman = item2
+        let item3 = document.data().gengs;
+        this.gengs = item3
       });
     },
     updateSide(side){
