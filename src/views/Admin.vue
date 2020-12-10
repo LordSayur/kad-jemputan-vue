@@ -81,7 +81,7 @@
       <label>Title</label>
       <input v-model="Makluman.title" type="text">
       <label>Content</label>
-      <input v-model="Makluman.content" type="text">
+      <textarea v-model="Makluman.content" cols="30" rows="30"></textarea>
       <button :class="`btn`" @click="updateDb()"  :disabled='buttonDisabled' style="margin-left: 1rem;">Update to Database</button>
       <div v-show="isShow">
         <span>Are you sure?</span>
@@ -116,7 +116,7 @@
           <button :class="`btn red`" @click="deleteGeng(index)"  :disabled='buttonDisabled'>X</button>
         </div>
       </div>
-      <button class="btn" @click="addGeng(gengs[side].push({id,name,msg}))">Add</button>
+      <button class="btn" @click="gengs[side].push({id: '',name:'',msg:''})">Add</button>
       <button :class="`btn`" @click="updateDb()"  :disabled='buttonDisabled' style="margin-left: 1rem;">Update to Database</button>
       <div v-show="isShow">
         <span>Are you sure?</span>
