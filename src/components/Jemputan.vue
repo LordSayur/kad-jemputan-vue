@@ -11,8 +11,9 @@
 
   <div v-if="geng != ''" id="customMessage" class="row center-align special-message">
     <h6>Special Message</h6>
-    <p>
-      {{ customMessage }}
+    <p v-html="gengName">
+    </p>
+    <p v-html="customMessage">
     </p>
   </div>
 
@@ -50,6 +51,8 @@ export default {
           'YM Awg Muhammad Amirul Bin Maidin'
         ]
       },
+      gengName: ''
+      ,
       customMessage: '',
       gengs: {
         omar: [
@@ -79,6 +82,7 @@ export default {
       let myGang = this.gengs[this.side].filter(g => g.id === this.geng)
       if (myGang.length > 0) {
         this.customMessage = myGang[0].msg
+        this.gengName = myGang[0].name
       }
     }
   }
