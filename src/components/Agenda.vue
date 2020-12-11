@@ -86,6 +86,7 @@ $line:3px;
   margin-left: 60px;
   border-radius: .5rem;
   padding: .3rem;
+  max-width: 8rem;
 
   &.highlight-done {
     color: lightgrey;
