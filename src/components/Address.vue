@@ -7,13 +7,13 @@
     <div class="map-description" v-show="isOmar">
       <a href="https://goo.gl/maps/k8U6aHAxnzesuesv5">No.15, Spg. 73, Jln. 60, Perumahan Kg. Rimba, Gadong, BE3319</a>
       <div class="map">
-        <iframe  class="google-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1225.3138004136108!2d114.92120382922539!3d4.96791133584139!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNMKwNTgnMDQuNSJOIDExNMKwNTUnMTguMyJF!5e1!3m2!1sen!2sbn!4v1600590138358!5m2!1sen!2sbn" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        <iframe  class="google-map z-depth-3" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1225.3138004136108!2d114.92120382922539!3d4.96791133584139!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNMKwNTgnMDQuNSJOIDExNMKwNTUnMTguMyJF!5e1!3m2!1sen!2sbn!4v1600590138358!5m2!1sen!2sbn" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
       </div>
     </div>
     <div class="map-description" v-show="!isOmar">
       <a href="https://goo.gl/maps/BH8oyVYLvjyphQYv7">Unit A1, Spg. 333, Kg. Serambangun, Tutong, TA3319</a>
       <div class="map">
-        <iframe v-show="!isOmar" class="google-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1225.648948723478!2d114.6539578292254!3d4.784234336215068!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNMKwNDcnMDMuMiJOIDExNMKwMzknMTYuMiJF!5e1!3m2!1sen!2sbn!4v1604926884038!5m2!1sen!2sbn" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        <iframe v-show="!isOmar" class="google-map z-depth-3" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1225.648948723478!2d114.6539578292254!3d4.784234336215068!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNMKwNDcnMDMuMiJOIDExNMKwMzknMTYuMiJF!5e1!3m2!1sen!2sbn!4v1604926884038!5m2!1sen!2sbn" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
       </div>
     </div>
   </section>
