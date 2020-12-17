@@ -31,6 +31,8 @@
       </div>
     
       <Address class='animate__animated animate__fadeInUp animate__delay-4s' :side='side'/>
+
+      <FlippingCard class='animate__animated animate__fadeInUp animate__delay-4s'/>
     </div>
 
     <div class='animate__animated animate__fadeInUp animate__delay-4s'>
@@ -47,6 +49,7 @@ import Jemputan from '@/components/Jemputan.vue'
 import Majlis from '@/components/Hajat.vue'
 import Tentative from '@/components/Tentative.vue'
 import Address from '@/components/Address.vue'
+import FlippingCard from '@/components/FlippingCard.vue'
 
 const fb = require('@/firebaseConfig.js')
 
@@ -59,6 +62,7 @@ export default {
     Majlis,
     Tentative,
     Address,
+    FlippingCard,
   },
   data() {
     return {
