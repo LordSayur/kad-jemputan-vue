@@ -13,9 +13,10 @@
         />
       </div>
       <div class="row">
-        <div v-for="(teka, key) in tekateki" :key="key">
+        <div v-for="(tekas, key) in tekateki" :key="key">
           <h4>{{ key }}</h4>
-          <div class="myFlex" v-for="(teka, index) in teka" :key="index">
+          <p v-if="!tekas.length">No {{ key }} teka teki</p>
+          <div class="myFlex" v-for="(teka, index) in tekas" :key="index">
             <div>
               <label>Soalan</label>
               <textarea v-model="teka.soalan" type="text"></textarea>
@@ -35,15 +36,28 @@
                 <label for="creator">Creator</label>
                 <input id="creator" v-model="teka.creator" type="text" />
               </div>
-              <button
-                v-if="key != 'rejected'"
-                @click="rejectTeka(key, index)"
-                class="btn red"
-              >
-                X
-              </button>
+              <div>
+                <button
+                  type="button"
+                  v-if="key == 'pending'"
+                  @click="approveTeka(tekas, index)"
+                  class="btn blue"
+                  style="margin-right: 1rem"
+                >
+                  Approve
+                </button>
+                <button
+                  type="button"
+                  v-if="key != 'rejected'"
+                  @click="rejectTeka(tekas, index)"
+                  class="btn red"
+                >
+                  X
+                </button>
+              </div>
             </div>
           </div>
+          <!-- Add New Button -->
           <button
             v-if="key === 'approved'"
             type="button"
@@ -76,7 +90,7 @@ export default {
     };
   },
   created() {
-    this.tekateki = this.getDataFromFB();
+    this.getDataFromFB();
   },
   methods: {
     getDataFromFB() {
@@ -87,6 +101,14 @@ export default {
     updateDb() {
       this.states.isShow = true;
     },
+    rejectTeka(arr, index) {
+      let rejected = arr.splice(index, 1)[0]
+      this.tekateki.rejected.push(rejected)
+    },
+    approveTeka(arr, index) {
+      let approved = arr.splice(index, 1)[0]
+      this.tekateki.approved.push(approved)
+    }
   },
 };
 </script>
@@ -96,5 +118,9 @@ export default {
 .myFlex {
   display: flex;
   flex-direction: column;
+  margin: 2rem auto;
+  border: 1px solid rgb(100, 100, 100);
+  border-radius: 1rem;
+  padding: 1rem;
 }
 </style>
