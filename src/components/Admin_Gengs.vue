@@ -8,18 +8,18 @@
         <UpdateDb v-if="states.isShow" docName='gengs' :payload="{gengs}" @updateDone="states.isShow = false" />
       </div>
       <div class="row">
-        <div v-for="(geng, index) in Gengs" :key='index' class="myFlex">
+        <div v-for="(geng, index) in Gengs" :key='index' class="row">
           <div>
-            <label>Geng ID</label>
-            <input v-model="geng.id" type="text" >
+            <label :for="'id'+index">Geng ID</label>
+            <input :id="'id'+index" v-model="geng.id" type="text" >
           </div>
           <div>
-            <label>Geng Name</label>
-            <input v-model="geng.name" type="text" >
+            <label :for="'name'+index">Geng Name</label>
+            <input :id="'name'+index" v-model="geng.name" type="text" >
           </div>
           <div>
-            <label>Special Message</label>
-            <textarea v-model="geng.msg" cols="30" rows="10"></textarea>
+            <label :for="'message'+index">Special Message</label>
+            <textarea :id="'message'+index" v-model="geng.msg" cols="30" rows="10"></textarea>
           </div>
           <div>
             <button :class="`btn red`" @click="deleteGeng(index)">X</button>
