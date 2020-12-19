@@ -9,10 +9,10 @@
         <UpdateDb v-if="states.isShow" docName='makluman' :payload="{makluman}" @updateDone="states.isShow = false" />
       </div>
       <div class="row">
-        <label>Title</label>
-        <input v-model="Makluman.title" type="text">
-        <label>Content</label>
-        <textarea v-model="Makluman.content" cols="30" rows="50"></textarea>
+        <label for="title">Title</label>
+        <input id="title" v-model="Makluman.title" type="text">
+        <label for="content">Content</label>
+        <textarea id="content" v-model="Makluman.content" cols="30" rows="50"></textarea>
       </div>
     </form>
   </div>

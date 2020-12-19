@@ -3,19 +3,19 @@
     <p v-if="!gengs">Fetching data...</p>
     <div v-else class="row">
       <h1>URL Generator</h1>
-      <label>side</label>
-      <input v-model='side' disabled type="text">
-      <label>name (optional)</label>
-      <input v-model='name' type="text">
-      <label>kampong (optional)</label>
-      <input v-model='kampong' type="text">
-      <label>geng (optional)</label>
-      <select v-model="geng" style="display: block">
+      <label for="side">side</label>
+      <input id="side" v-model='side' disabled type="text">
+      <label for="name">name (optional)</label>
+      <input id="name" v-model='name' type="text">
+      <label for="kampong">kampong (optional)</label>
+      <input id="kampong" v-model='kampong' type="text">
+      <label for="geng">geng (optional)</label>
+      <select id="geng" v-model="geng" style="display: block">
         <option value="" disabled selected>Choose Geng</option>
         <option v-for="geng in gengs[side]" :key="geng.id" :value="geng.id">{{ geng.id }}</option>
       </select>
-      <label>URL</label>
-      <input v-model='generateUrl' id='url' type="text">
+      <label for="url">URL</label>
+      <input id="url" v-model='generateUrl' type="text">
       <button @click="copy" class="btn">Copy</button>
     </div>
   </div>
