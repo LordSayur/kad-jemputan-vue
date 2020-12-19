@@ -1,0 +1,126 @@
+<template>
+  <form @submit.prevent="updateDb">
+    <h1>Teka Teki</h1>
+    <p v-if="!tekateki">Fetching data...</p>
+    <div v-else>
+      <div class="row">
+        <button type="submit" :class="`btn`">Update to Database</button>
+        <UpdateDb
+          v-if="states.isShow"
+          docName="teka-teki"
+          :payload="{ tekateki }"
+          @updateDone="states.isShow = false"
+        />
+      </div>
+      <div class="row">
+        <div v-for="(tekas, key) in tekateki" :key="key">
+          <h4>{{ key }}</h4>
+          <p v-if="!tekas.length">No {{ key }} teka teki</p>
+          <div class="myFlex" v-for="(teka, index) in tekas" :key="index">
+            <div>
+              <label>Soalan</label>
+              <textarea v-model="teka.soalan" type="text"></textarea>
+            </div>
+            <div>
+              <label>Jawapan</label>
+              <textarea v-model="teka.jawapan" type="text"></textarea>
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              "
+            >
+              <div>
+                <label for="creator">Creator</label>
+                <input id="creator" v-model="teka.creator" type="text" />
+              </div>
+              <div>
+                <button
+                  type="button"
+                  v-if="key == 'pending'"
+                  @click="approveTeka(tekas, index)"
+                  class="btn blue"
+                  style="margin-right: 1rem"
+                >
+                  Approve
+                </button>
+                <button
+                  type="button"
+                  v-if="key != 'rejected'"
+                  @click="rejectTeka(tekas, index)"
+                  class="btn red"
+                >
+                  X
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Add New Button -->
+          <button
+            v-if="key === 'approved'"
+            type="button"
+            :class="`btn`"
+            @click="teka.push({ creator: '', jawapan: '', soalan: '' })"
+          >
+            Add New
+          </button>
+          <div style="height:2px; background-color: green;"></div>
+        </div>
+      </div>
+    </div>
+  </form>
+</template>
+
+<script>
+const fb = require("@/firebaseConfig.js");
+import UpdateDb from "@/components/UpdateDb";
+export default {
+  name: "TekaTeki",
+  components: {
+    UpdateDb,
+  },
+  data() {
+    return {
+      tekateki: null,
+      states: {
+        isShow: false,
+      },
+    };
+  },
+  created() {
+    this.getDataFromFB();
+  },
+  methods: {
+    getDataFromFB() {
+      fb.omaramirah.doc("teka-teki").onSnapshot((document) => {
+        this.tekateki = document.data().tekateki;
+      });
+    },
+    updateDb() {
+      this.states.isShow = true;
+    },
+    rejectTeka(arr, index) {
+      let rejected = arr.splice(index, 1)[0]
+      this.tekateki.rejected.push(rejected)
+    },
+    approveTeka(arr, index) {
+      let approved = arr.splice(index, 1)[0]
+      this.tekateki.approved.push(approved)
+    }
+  },
+};
+</script>
+
+<style lang='scss' scoped>
+@import "@/main.scss";
+.myFlex {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto;
+  border: 1px solid rgb(100, 100, 100);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+</style>

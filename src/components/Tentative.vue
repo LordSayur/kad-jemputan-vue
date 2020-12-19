@@ -27,70 +27,8 @@ export default {
   data() {
     return{
       agendas: {
-        omar: [
-          {
-            time: '11.00',
-            period: 'am',
-            agenda: 'Menerima Jemputan',
-            status: 'todo'
-          },
-          {
-            time: '11.30',
-            period: 'am',
-            agenda: 'Doa Selamat & Jamuan',
-            status: 'todo'
-          },
-          {
-            time: '1:15',
-            period: 'pm',
-            agenda: 'Pengantin Lelaki Bertolak',
-            status: 'todo'
-          },
-          {
-            time: '2:00',
-            period: 'pm',
-            agenda: 'Tunang & Nikah',
-            status: 'todo'
-          },
-          {
-            time: '2:45',
-            period: 'pm',
-            agenda: 'Basuh Kaki & Sanding',
-            status: 'todo'
-          },
-        ],
-        amirah: [
-          {
-            time: '11.00',
-            period: 'am',
-            agenda: 'Menerima Jemputan Amirah',
-            status: 'done'
-          },
-          {
-            time: '11.30',
-            period: 'am',
-            agenda: 'Doa Selamat & Jamuan',
-            status: 'done'
-          },
-          {
-            time: '1:15',
-            period: 'pm',
-            agenda: 'Pengantin Lelaki Bertolak',
-            status: 'currently'
-          },
-          {
-            time: '2:00',
-            period: 'pm',
-            agenda: 'Tunang & Nikah',
-            status: 'todo'
-          },
-          {
-            time: '2:45',
-            period: 'pm',
-            agenda: 'Basuh Kaki & Sanding',
-            status: 'todo'
-          },
-        ],
+        omar: [],
+        amirah: [],
       },
       countDown: '',
       showCountDown: true,
@@ -102,7 +40,7 @@ export default {
   },
   methods: {
     async getDataFromFB() {
-      let documents = await fb.agendas.doc('F5XNcpXkHQTIKHWHcLXW').onSnapshot((document) => {
+      let documents = await fb.omaramirah.doc('agendas').onSnapshot((document) => {
         let item = document.data().agendas;
         this.agendas = item
       });

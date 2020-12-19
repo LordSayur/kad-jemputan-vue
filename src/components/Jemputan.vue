@@ -73,7 +73,7 @@ export default {
   },
   methods: {
     async getDataFromFB() {
-      let documents = await fb.agendas.doc('F5XNcpXkHQTIKHWHcLXW').onSnapshot((document) => {
+      let documents = await fb.omaramirah.doc('gengs').onSnapshot((document) => {
         this.gengs = document.data().gengs;
         this.updateCustomMessage();
       });
