@@ -2,23 +2,23 @@
   <div class="container">
     <h1>Admin</h1>
     <!-- Side button -->
-    <div>
+    <div class="row">
       <button :class="`btn ${isOmar ? 'active blue' : 'btn-flat'}`" @click="updateSide('omar')">Omar</button>
       <button :class="`btn ${isOmar ? 'btn-flat' : 'active blue'}`" @click="updateSide('amirah')">Amirah</button>
+      <hr>
     </div>
     <!-- tabs button -->
-    <div>
-      <br>
+    <div class="row">
       <button :class="`btn ${currentTab == 'tentative' ? 'active blue' : 'btn-flat'}`" @click="updateTab('Tentative')">Tentative</button>
       <button :class="`btn ${currentTab == 'url-generator' ? 'active blue' : 'btn-flat'}`" @click="updateTab('UrlGenerator')">URL Generator</button>
       <button :class="`btn ${currentTab == 'makluman' ? 'active blue' : 'btn-flat'}`" @click="updateTab('Makluman')">Makluman</button>
       <button :class="`btn ${currentTab == 'gengs' ? 'active blue' : 'btn-flat'}`" @click="updateTab('Gengs')">Gengs</button>
       <button :class="`btn ${currentTab == 'teka-teki' ? 'active blue' : 'btn-flat'}`" @click="updateTab('TekaTeki')">Teka Teki</button>
+      <hr>
     </div>
     <keep-alive>
       <component :is='currentTab' :side='side' :isOmar='isOmar'></component>
     </keep-alive>
-    
   </div>
 </template>
 
@@ -67,12 +67,4 @@ export default {
 
 <style lang='scss'>
 @import '@/main.scss';
-.myFlex {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-}
-.myFlex-item {
-  flex: 1 0 50%;
-}
 </style>
