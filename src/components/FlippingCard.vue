@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="form-container">
-      <p class="share" @click="showForm = true; disableButton = false;">Share Teka Teki biskita? Takan Sini!🎯</p>
+      <p class="share" @click="showForm = true; disableButton = false;">Mau Share Teka Teki? Takan Sini!🎯</p>
       <div v-if="showForm" class="teka-form">
         <form novalidate @submit.prevent='submitTekaTeki'>
           <label for="soalan">Soalan</label>
