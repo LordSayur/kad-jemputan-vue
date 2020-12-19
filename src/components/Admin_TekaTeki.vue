@@ -91,7 +91,7 @@ export default {
 };
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 @import "@/main.scss";
 .myFlex {
   display: flex;
