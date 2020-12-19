@@ -51,8 +51,8 @@ export default {
   },
   methods: {
     async getDataFromFB() {
-      let documents = await fb.agendas.doc('teka-teki').onSnapshot((document) => {
-        this.tekaTeki = document.data().tekaTeki;
+      let documents = await fb.omaramirah.doc('teka-teki').onSnapshot((document) => {
+        this.tekaTeki = document.data().tekateki.approved;
       });
     },
     flipCard(fn) {

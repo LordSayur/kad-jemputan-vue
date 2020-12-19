@@ -94,7 +94,7 @@ export default {
   },
   methods: {
     async getDataFromFB() {
-      let documents = await fb.agendas.doc('F5XNcpXkHQTIKHWHcLXW').onSnapshot((document) => {
+      let documents = await fb.omaramirah.doc('makluman').onSnapshot((document) => {
         let item = document.data().makluman;
         let makluman = item[this.side === 'omar' ? 'omar' : 'amirah']
         this.title = makluman.title;

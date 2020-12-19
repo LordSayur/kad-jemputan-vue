@@ -23,9 +23,9 @@ const settings = {
 db.settings(settings);
 
 // firebase collections
-const agendas = db.collection("agendas");
+const omaramirah = db.collection("omar-amirah");
 
 export {
   db,
-  agendas
+  omaramirah
 };
