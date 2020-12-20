@@ -8,10 +8,13 @@
         <UpdateDb v-if="states.isShow" docName='gengs' :payload="{gengs}" @updateDone="states.isShow = false" />
       </div>
       <div class="row">
-        <div v-for="(geng, index) in Gengs" :key='index' class="row">
-          <div>
-            <label :for="'id'+index">Geng ID</label>
-            <input :id="'id'+index" v-model="geng.id" type="text" >
+        <div v-for="(geng, index) in Gengs" :key='index' class="row gengs">
+          <div class="myFlex">
+            <div>
+              <label :for="'id'+index">Geng ID</label>
+              <input :id="'id'+index" v-model="geng.id" type="text" >
+            </div>
+            <button :class="`btn red`" @click="deleteGeng(index)">X</button>
           </div>
           <div>
             <label :for="'name'+index">Geng Name</label>
@@ -19,10 +22,7 @@
           </div>
           <div>
             <label :for="'message'+index">Special Message</label>
-            <textarea :id="'message'+index" v-model="geng.msg" cols="30" rows="10"></textarea>
-          </div>
-          <div>
-            <button :class="`btn red`" @click="deleteGeng(index)">X</button>
+            <textarea :id="'message'+index" v-model="geng.msg" style="min-height: 10rem"></textarea>
           </div>
         </div>
       </div>
@@ -83,6 +83,15 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang='scss' scoped>
+.gengs{
+  border: 1px solid lightblue;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+.myFlex{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 </style>

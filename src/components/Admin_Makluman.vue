@@ -12,7 +12,7 @@
         <label for="title">Title</label>
         <input id="title" v-model="Makluman.title" type="text">
         <label for="content">Content</label>
-        <textarea id="content" v-model="Makluman.content" cols="30" rows="50"></textarea>
+        <textarea id="content" v-model="Makluman.content"  style="min-height: 10rem"></textarea>
       </div>
     </form>
   </div>
