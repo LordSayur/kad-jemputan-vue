@@ -1,68 +1,128 @@
 <template>
   <div>
     <p v-if="!agendas">Fetching data...</p>
-    <form v-else @submit.prevent="updateDb" class='col s12'>
-      <h2>Tentative - {{ isOmar ? 'Omar' : 'Amirah'}}</h2>
+    <form v-else @submit.prevent="updateDb" class="col s12">
+      <h2>Tentative - {{ isOmar ? "Omar" : "Amirah" }}</h2>
       <!-- Buttons -->
       <div class="row">
-          <button type="submit" :class="`btn`">Update to Database</button>
-          <UpdateDb v-if="states.isShow" docName='agendas' :payload="{agendas}" @updateDone="states.isShow = false" />
+        <button type="submit" :class="`btn`">Update to Database</button>
+        <UpdateDb
+          v-if="states.isShow"
+          docName="agendas"
+          :payload="{ agendas }"
+          @updateDone="states.isShow = false"
+        />
       </div>
       <!-- List -->
-      <div class="scrollable">
-        <div v-for="(agenda, index) in Agendas" :key="index" class="row">
-          <div class="tentative">
+      <div v-for="(agenda, index) in Agendas" :key="index" class="row">
+        <div class="tentative">
+          <!-- Agenda -->
+          <div>
+            <label :for="'agenda' + index">Agenda</label>
+            <textarea
+              :id="'agenda' + index"
+              v-model="agenda.agenda"
+              style="min-height: 5rem"
+            ></textarea>
+          </div>
+          <!-- Time -->
+          <div class="tentative-inner">
             <div>
-              <label :for="'agenda'+index">Agenda</label>
-              <textarea :id="'agenda'+index" v-model="agenda.agenda"  style="min-height: 5rem"></textarea>
+              <label :for="'masa' + index">Masa</label>
+              <input :id="'masa' + index" v-model="agenda.time" type="text" />
             </div>
-            <div class="tentative-inner">
-              <div>
-                <label :for="'masa'+index">Masa</label>
-                <input :id="'masa'+index" v-model="agenda.time" type="text">
-              </div>
-              <select v-model="agenda.period" style="display: block">
-                <option value="" disabled selected>Choose Status</option>
-                <option value="am">am</option>
-                <option value="pm">pm</option>
-              </select>
+            <p>
+              <label :for="'am' + index">
+                <input
+                  :id="'am' + index"
+                  type="radio"
+                  value="am"
+                  v-model="agenda.period"
+                  class="with-gap"
+                />
+                <span>Am</span>
+              </label>
+            </p>
+            <p>
+              <label :for="'pm' + index">
+                <input
+                  :id="'pm' + index"
+                  type="radio"
+                  value="pm"
+                  v-model="agenda.period"
+                  class="with-gap"
+                />
+                <span>Pm</span>
+              </label>
+            </p>
+          </div>
+          <!-- Status -->
+          <div class="tentative-inner">
+            <div>
+              <p>
+                <label :for="'todo' + index">
+                  <input
+                    :id="'todo' + index"
+                    type="radio"
+                    value="todo"
+                    v-model="agenda.status"
+                    class="with-gap"
+                  />
+                  <span>Todo</span>
+                </label>
+              </p>
+              <p>
+                <label :for="'currently' + index">
+                  <input
+                    :id="'currently' + index"
+                    type="radio"
+                    value="currently"
+                    v-model="agenda.status"
+                    class="with-gap"
+                  />
+                  <span>Current</span>
+                </label>
+              </p>
+              <p>
+                <label :for="'done' + index">
+                  <input
+                    :id="'done' + index"
+                    type="radio"
+                    value="done"
+                    v-model="agenda.status"
+                    class="with-gap"
+                  />
+                  <span>Done</span>
+                </label>
+              </p>
             </div>
-            <div class="tentative-inner">
-              <div>
-                <label :for="'status'+index">Status</label>
-                <select :id="'status'+index" v-model="agenda.status" style="display: block">
-                  <option value="" disabled selected>Choose Status</option>
-                  <option value="todo">Todo</option>
-                  <option value="currently">Current</option>
-                  <option value="done">Done</option>
-                </select>
-              </div>
-              <button :class="`btn red`" @click="deleteAgenda(index)">X</button>
-            </div>
+            <button :class="`btn red`" @click="deleteAgenda(index)">X</button>
           </div>
         </div>
       </div>
       <!-- Buttons -->
       <div class="row">
-        <button type="button" :class="`btn`" @click="addAgenda()">Add New</button>
+        <button type="button" :class="`btn`" @click="addAgenda()">
+          Add New
+        </button>
       </div>
     </form>
   </div>
 </template>
 
 <script>
-const fb = require('@/firebaseConfig.js')
-import UpdateDb from '@/components/UpdateDb'
+const fb = require("@/firebaseConfig.js");
+import UpdateDb from "@/components/UpdateDb";
 export default {
-  name: 'AdminTentative',
+  name: "AdminTentative",
   props: {
     isOmar: {
       type: Boolean,
-      default: true
+      default: true,
     },
     side: {
       type: String,
-      default: 'omar'
+      default: "omar",
     },
   },
   components: {
@@ -73,39 +133,39 @@ export default {
       agendas: null,
       states: {
         isShow: false,
-      }
-    }
+      },
+    };
   },
-  created () {
-    this.getDataFromFB()
+  created() {
+    this.getDataFromFB();
   },
   methods: {
     getDataFromFB() {
-      fb.omaramirah.doc('agendas').onSnapshot((document) => {
+      fb.omaramirah.doc("agendas").onSnapshot((document) => {
         this.agendas = document.data().agendas;
       });
     },
     addAgenda() {
-      this.agendas[this.isOmar ? 'omar' : 'amirah'].push({
-        time: '11.00',
-        period: 'am',
-        agenda: 'omar tidur',
-        status: 'todo'
-      })
+      this.agendas[this.isOmar ? "omar" : "amirah"].push({
+        time: "11.00",
+        period: "am",
+        agenda: "omar tidur",
+        status: "todo",
+      });
     },
     deleteAgenda(index) {
-      this.agendas[this.side].splice(index, 1)
+      this.agendas[this.side].splice(index, 1);
     },
-    updateDb(){
+    updateDb() {
       this.states.isShow = true;
-    }
+    },
   },
   computed: {
-    Agendas(){
-      return this.isOmar ? this.agendas.omar : this.agendas.amirah
+    Agendas() {
+      return this.isOmar ? this.agendas.omar : this.agendas.amirah;
     },
   },
-}
+};
 </script>
 
 <style lang='scss' scoped>
@@ -123,12 +183,5 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-}
-.scrollable {
-  max-height: 50vh;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  padding: 1rem;
-  margin-bottom: 1rem;
 }
 </style>
