@@ -5,11 +5,19 @@
     <div v-for="(teka, index) in status" :key="index" class="teka">
       <div>
         <label>Soalan</label>
-        <textarea v-model="teka.soalan" type="text" style="min-height: 5rem"></textarea>
+        <textarea
+          v-model="teka.soalan"
+          type="text"
+          style="min-height: 5rem"
+        ></textarea>
       </div>
       <div>
         <label>Jawapan</label>
-        <textarea v-model="teka.jawapan" type="text" style="min-height: 5rem"></textarea>
+        <textarea
+          v-model="teka.jawapan"
+          type="text"
+          style="min-height: 5rem"
+        ></textarea>
       </div>
       <div class="myFlex">
         <div>
@@ -19,8 +27,8 @@
         <div>
           <button
             type="button"
-            v-if="statusName == 'pending'"
-            @click="approveTeka(tekas, index)"
+            v-if="statusName != 'approved'"
+            @click="approveTeka(status, index)"
             class="btn blue"
             style="margin-right: 1rem"
           >
@@ -29,7 +37,7 @@
           <button
             type="button"
             v-if="statusName != 'rejected'"
-            @click="rejectTeka(tekas, index)"
+            @click="rejectTeka(status, index)"
             class="btn red"
           >
             X
@@ -51,16 +59,24 @@
 
 <script>
 export default {
-  name: 'TekaTekiList',
+  name: "TekaTekiList",
   props: {
     status: {
-      type: Array
+      type: Array,
     },
     statusName: {
-      type: String
-    }
+      type: String,
+    },
   },
-}
+  methods: {
+    approveTeka(arr, index) {
+      this.$emit("approved", { arr, index });
+    },
+    rejectTeka(arr, index) {
+      this.$emit("rejected", { arr, index });
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -69,7 +85,7 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
-.teka{
+.teka {
   margin-top: 3rem;
   border: 1px solid lightblue;
   padding: 2rem;

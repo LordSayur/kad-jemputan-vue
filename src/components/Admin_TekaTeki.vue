@@ -15,14 +15,23 @@
       <div class="row">
         <div>
           <label for="status">Status</label>
-          <select v-model="states.currentStatus" id="status" style="display: block;">
-              <option value="" disabled selected>Choose Status</option>
-              <option value="approved">Approved</option>
-              <option value="pending">Pending</option>
-              <option value="rejected">Rejected</option>
-            </select>
+          <select
+            v-model="states.currentStatus"
+            id="status"
+            style="display: block"
+          >
+            <option value="" disabled selected>Choose Status</option>
+            <option value="approved">Approved</option>
+            <option value="pending">Pending</option>
+            <option value="rejected">Rejected</option>
+          </select>
         </div>
-        <TekaTekiList :status="tekateki[states.currentStatus]" :statusName="states.currentStatus"/>
+        <TekaTekiList
+          :status="tekateki[states.currentStatus]"
+          :statusName="states.currentStatus"
+          @approved="approveTeka"
+          @rejected="rejectTeka"
+        />
       </div>
     </div>
   </form>
@@ -36,14 +45,14 @@ export default {
   name: "TekaTeki",
   components: {
     UpdateDb,
-    TekaTekiList
+    TekaTekiList,
   },
   data() {
     return {
       tekateki: null,
       states: {
         isShow: false,
-        currentStatus: 'pending'
+        currentStatus: "pending",
       },
     };
   },
@@ -59,14 +68,14 @@ export default {
     updateDb() {
       this.states.isShow = true;
     },
-    rejectTeka(arr, index) {
-      let rejected = arr.splice(index, 1)[0]
-      this.tekateki.rejected.push(rejected)
+    rejectTeka(event) {
+      let rejected = event.arr.splice(event.index, 1)[0];
+      this.tekateki.rejected.push(rejected);
     },
-    approveTeka(arr, index) {
-      let approved = arr.splice(index, 1)[0]
-      this.tekateki.approved.push(approved)
-    }
+    approveTeka(event) {
+      let approved = event.arr.splice(event.index, 1)[0];
+      this.tekateki.approved.push(approved);
+    },
   },
 };
 </script>
