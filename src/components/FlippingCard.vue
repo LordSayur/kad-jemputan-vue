@@ -28,7 +28,7 @@
     </div>
     <div class="form-container">
       <p class="share" @click="showForm = true; disableButton = false;">Mau Share Teka Teki? Takan Sini!🎯</p>
-      <div v-if="showForm" class="teka-form">
+      <div v-if="showForm" class="teka-form animate__animated animate__bounceIn">
         <form novalidate @submit.prevent='submitTekaTeki'>
           <label for="soalan">Soalan</label>
           <textarea name="soalan" placeholder="Contoh: Banyak banyak 🍔..." id="soalan" cols="30" rows="10" v-model="proposedTeka.soalan" required></textarea>
