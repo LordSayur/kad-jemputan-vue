@@ -57,7 +57,7 @@
       <component :is="currentTab" :side="side" :isOmar="isOmar"></component>
     </keep-alive>
 
-    <button id="myBtn">👆</button>
+    <button id="myBtn" @click="topFunction">👆</button>
   </div>
 </template>
 
@@ -85,6 +85,10 @@ export default {
     },
     updateTab(tab) {
       this.currentTab = this.tabs[tab];
+    },
+    topFunction() {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     },
   },
   data() {
@@ -114,7 +118,7 @@ export default {
   z-index: 99; /* Make sure it does not overlap */
   border: none; /* Remove borders */
   outline: none; /* Remove outline */
-  background-color: red; /* Set a background color */
+  background-color: lightsalmon; /* Set a background color */
   color: white; /* Text color */
   cursor: pointer; /* Add a mouse pointer on hover */
   padding: 15px; /* Some padding */
