@@ -35,6 +35,10 @@
       <FlippingCard class='animate__animated animate__fadeInUp animate__delay-4s'/>
     </div>
 
+    <div class='animate__animated animate__fadeInUp animate__delay-4s center-align download'>
+      <a :href="require(`@/assets/ecard-${side}.png`)" download>📩 Download eCard</a>
+    </div>
+
     <div class='animate__animated animate__fadeInUp animate__delay-4s'>
       <h6 style="text-align: center;text-decoration: underline;margin-bottom: 1rem;"><a href="https://wsb.netlify.app/">Waktu Sembahyang Brunei</a></h6>
       <iframe src="https://wsb.netlify.app/" style="height: 35rem; width: 100%" frameborder="0"></iframe>
@@ -164,5 +168,13 @@ body {
     width: 2rem;
     margin: 0 1rem;
   }
+}
+.download {
+  width: 12rem;
+  margin: auto;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border: 1px solid lightblue;
+  border-radius: 1rem;
 }
 </style>
