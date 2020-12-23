@@ -1,7 +1,7 @@
 <template>
   <div class="center-align">
     <h5>Teka Teki</h5>
-    <div class="flip-card">
+    <div class="flip-card" v-if="seeds">
       <div :class="`flip-card-inner ${isFlipped ? 'flipped' : ''}`">
         <div class="card horizontal flip-card-front z-depth-3">
           <div class="card-stacked">
@@ -119,6 +119,7 @@ export default {
       },
       disableButton: false,
       successMessage: "",
+      seeds: null,
     };
   },
   created() {
@@ -131,6 +132,12 @@ export default {
         .onSnapshot((document) => {
           this.tekateki = document.data().tekateki;
           this.tekaTeki = this.tekateki.approved;
+          this.index = Math.floor(Math.random() * this.tekaTeki.length);
+          this.seeds = [];
+          for (let index = 0; index < this.tekaTeki.length; index++) {
+            this.seeds.push(index);
+          }
+          this.seeds = this.suffle(this.seeds);
         });
     },
     async submitTekaTeki() {
@@ -178,20 +185,39 @@ export default {
       this.isFlipped = !this.isFlipped;
       if (!this.isFlipped) {
         setTimeout(() => {
-          this.index = Math.floor(Math.random() * this.tekaTeki.length);
+          this.index++;
         }, 500);
       }
+    },
+    suffle(array) {
+      let currentIndex = array.length,
+        temporaryValue,
+        randomIndex;
+
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+
+      return array;
     },
   },
   computed: {
     GetTekaTeki() {
-      return this.tekaTeki[this.index].soalan;
+      return this.tekaTeki[this.seeds[this.index]].soalan;
     },
     GetAnswer() {
-      return this.tekaTeki[this.index].jawapan;
+      return this.tekaTeki[this.seeds[this.index]].jawapan;
     },
     GetCreator() {
-      return this.tekaTeki[this.index].creator;
+      return this.tekaTeki[this.seeds[this.index]].creator;
     },
   },
 };
