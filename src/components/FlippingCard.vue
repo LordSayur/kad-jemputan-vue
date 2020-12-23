@@ -9,8 +9,8 @@
               <p>{{ GetTekaTeki }}</p>
               <p class="creator">by {{ GetCreator }}</p>
             </div>
-            <div class="card-action">
-              <a @click="flipCard">Bah Tia!</a>
+            <div @click="flipCard" class="card-action">
+              <h6 class="green-text">Bah Tia! 👈</h6>
             </div>
           </div>
         </div>
@@ -19,8 +19,8 @@
             <div class="card-content">
               <p class="answer">{{ GetAnswer }}</p>
             </div>
-            <div class="card-action">
-              <a @click="flipCard">Lagi!</a>
+            <div @click="flipCard" class="card-action">
+              <h6 class="green-text">Lagi ‼</h6>
             </div>
           </div>
         </div>
@@ -259,7 +259,17 @@ export default {
     -webkit-backface-visibility: hidden; /* Safari */
     backface-visibility: hidden;
     .card-content {
-      overflow: scroll;
+      overflow-y: scroll;
+    }
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .card-content::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .card-content {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
     }
   }
 }
