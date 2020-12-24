@@ -221,7 +221,7 @@ body {
 .download {
   width: 12rem;
   margin: auto;
-  margin-bottom: 2rem;
+  margin-bottom: 5rem;
   padding: 1rem;
   border: 1px solid lightblue;
   border-radius: 1rem;
