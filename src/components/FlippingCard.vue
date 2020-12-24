@@ -1,5 +1,5 @@
 <template>
-  <div class="center-align">
+  <div class="center-align teka-teki">
     <h5>Teka Teki</h5>
     <div class="flip-card" v-if="seeds">
       <div :class="`flip-card-inner ${isFlipped ? 'flipped' : ''}`">
@@ -224,12 +224,15 @@ export default {
 </script>
 
 <style lang='scss'>
+.teka-teki {
+  margin: 5rem auto;
+}
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .flip-card {
   background-color: transparent;
   margin: auto;
   width: 80%;
-  height: 15rem;
+  height: 25rem;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 
@@ -260,6 +263,10 @@ export default {
     backface-visibility: hidden;
     .card-content {
       overflow-y: scroll;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
     /* Hide scrollbar for Chrome, Safari and Opera */
     .card-content::-webkit-scrollbar {
