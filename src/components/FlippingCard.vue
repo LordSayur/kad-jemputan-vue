@@ -20,6 +20,7 @@
                 {{ GetTekaTeki }}
               </p>
               <p class="creator">by {{ GetCreator }}</p>
+              <p class="tekaNo">{{ GetNumber }}</p>
             </div>
             <div @click="flipCard" class="card-action">
               <h6 class="green-text">Bah Tia! 👈</h6>
@@ -262,6 +263,9 @@ export default {
     GetCreator() {
       return this.tekaTeki[this.seeds[this.index]].creator;
     },
+    GetNumber() {
+      return `${this.seeds[this.index] + 1} / ${this.tekaTeki.length}`;
+    },
   },
 };
 </script>
@@ -374,5 +378,11 @@ export default {
   &::after {
     content: "🍕";
   }
+}
+
+.tekaNo {
+  padding-top: 1rem;
+  font-size: 0.8rem;
+  color: lightgrey;
 }
 </style>
