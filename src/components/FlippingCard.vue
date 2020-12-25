@@ -1,5 +1,5 @@
 <template>
-  <div class="center-align teka-teki">
+  <div id="teka-teki" class="center-align teka-teki">
     <h4>Teka Teki 🤠</h4>
     <div class="susun">
       <span>Susun:</span>

@@ -18,14 +18,19 @@
       <!-- Shortcut -->
       <div>
         <a
+          class="shortcut address animate__animated animate__fadeInLeft animate__delay-3s"
+          href="#address"
+          ><i class="material-icons">location_on</i></a
+        >
+        <a
           class="shortcut majlis animate__animated animate__fadeInLeft animate__delay-4s"
           href="#tentative"
           >LIVE!</a
         >
         <a
-          class="shortcut address animate__animated animate__fadeInLeft animate__delay-5s"
-          href="#address"
-          ><i class="material-icons">location_on</i></a
+          class="shortcut teka-teki animate__animated animate__fadeInLeft animate__delay-5s"
+          href="#teka-teki"
+          >🤠</a
         >
       </div>
 
@@ -52,6 +57,7 @@
       />
     </div>
 
+    <!-- Extra -->
     <div class="extra animate__animated animate__fadeInUp animate__delay-4s">
       <!-- Makluman -->
       <div id="makluman">
@@ -63,10 +69,10 @@
 
       <!-- Download eCard -->
       <div class="center-align download">
-      <a :href="require(`@/assets/ecard-${side}.png`)" download
-        >📩 Download eCard</a
-      >
-    </div>
+        <a :href="require(`@/assets/ecard-${side}.png`)" download
+          >📩 Download eCard</a
+        >
+      </div>
     </div>
 
     <FlippingCard
@@ -189,12 +195,15 @@ body {
   color: black;
   background-color: white;
   opacity: 0.5;
+  &.address {
+    bottom: 11rem;
+  }
   &.majlis {
-    bottom: 5rem;
+    bottom: 7.5rem;
     font-weight: 700;
   }
-  &.address {
-    bottom: 8.5rem;
+  &.teka-teki {
+    bottom: 4rem;
   }
 }
 .sticky {
