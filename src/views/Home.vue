@@ -50,30 +50,28 @@
         class="animate__animated animate__fadeInUp animate__delay-4s"
         :side="side"
       />
+    </div>
 
+    <div class="extra animate__animated animate__fadeInUp animate__delay-4s">
       <!-- Makluman -->
-      <div class="animate__animated animate__fadeInUp animate__delay-4s">
+      <div id="makluman">
         <h5>{{ title }}</h5>
         <div v-html="content" style="margin-bottom: 3rem"></div>
       </div>
 
-      <Address
-        class="animate__animated animate__fadeInUp animate__delay-4s"
-        :side="side"
-      />
+      <Address :side="side" />
 
-      <FlippingCard
-        class="animate__animated animate__fadeInUp animate__delay-4s"
-      />
-    </div>
-
-    <div
-      class="animate__animated animate__fadeInUp animate__delay-4s center-align download"
-    >
+      <!-- Download eCard -->
+      <div class="center-align download">
       <a :href="require(`@/assets/ecard-${side}.png`)" download
         >📩 Download eCard</a
       >
     </div>
+    </div>
+
+    <FlippingCard
+      class="animate__animated animate__fadeInUp animate__delay-4s"
+    />
 
     <div class="animate__animated animate__fadeInUp animate__delay-4s">
       <h6
@@ -171,6 +169,9 @@ body {
   max-width: 30rem;
   position: relative;
 }
+#makluman {
+  color: darkslategrey;
+}
 .p5Canvas {
   width: 100% !important;
   position: fixed;
@@ -205,10 +206,9 @@ body {
   justify-content: center;
   width: 100%;
   height: 3rem;
-  background-color: white;
+  background-color: rgba($color: white, $alpha: 0.5);
   color: black;
   z-index: 100;
-  opacity: 0.9;
   display: none;
   &.showBanner {
     display: flex;
@@ -220,10 +220,16 @@ body {
 }
 .download {
   width: 12rem;
-  margin: auto;
-  margin-bottom: 5rem;
+  margin: 2rem auto;
   padding: 1rem;
-  border: 1px solid lightblue;
+  border: 1px solid darkslategrey;
   border-radius: 1rem;
+  a {
+    color: darkslategrey;
+  }
+}
+.extra {
+  padding: 2rem;
+  background-color: #ffc9b7;
 }
 </style>
