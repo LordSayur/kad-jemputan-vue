@@ -8,7 +8,10 @@
         >Amirah's Place</a
       >
     </div>
-    <div class="map-description" v-show="isOmar">
+    <div
+      class="map-description animate__animated animate__fadeIn"
+      v-show="isOmar"
+    >
       <a href="https://goo.gl/maps/k8U6aHAxnzesuesv5"
         >No.15, Spg. 73, Jln. 60, Perumahan Kg. Rimba, Gadong, BE3319</a
       >
@@ -24,7 +27,10 @@
         ></iframe>
       </div>
     </div>
-    <div class="map-description" v-show="!isOmar">
+    <div
+      class="map-description animate__animated animate__fadeIn"
+      v-show="!isOmar"
+    >
       <a href="https://goo.gl/maps/BH8oyVYLvjyphQYv7"
         >Unit A1, Spg. 333, Kg. Serambangun, Tutong, TA3319</a
       >
@@ -76,19 +82,24 @@ export default {
     height: 100%;
   }
   .button {
-    border: 2px solid lightgray;
+    border: 2px solid darkslategrey;
     border-radius: 0.5rem;
     padding: 0.5rem;
     margin-right: 0.5rem;
-    color: lightgray;
+    color: darkslategrey;
   }
   .highlight {
-    color: burlywood;
+    color: darkred;
+    border-color: darkred;
   }
   .map-description {
     a {
-      color: lightskyblue;
+      color: darkslategrey;
       text-decoration: underline;
+      padding: 2rem auto;
+      &::before {
+        content: "👉 ";
+      }
     }
   }
 }
