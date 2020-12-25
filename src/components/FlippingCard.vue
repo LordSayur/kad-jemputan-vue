@@ -1,12 +1,24 @@
 <template>
   <div class="center-align teka-teki">
-    <h5>Teka Teki</h5>
+    <h4>Teka Teki 🤠</h4>
+    <div class="susun">
+      <span>Susun:</span>
+      <span @click="changeSort('latest')" :class="`${isLatest ? 'active' : ''}`"
+        >Latest</span
+      >
+      |
+      <span @click="changeSort('random')" :class="`${isLatest ? '' : 'active'}`"
+        >Random</span
+      >
+    </div>
     <div class="flip-card" v-if="seeds">
       <div :class="`flip-card-inner ${isFlipped ? 'flipped' : ''}`">
         <div class="card horizontal flip-card-front z-depth-3">
           <div class="card-stacked">
             <div class="card-content">
-              <p>{{ GetTekaTeki }}</p>
+              <p>
+                {{ GetTekaTeki }}
+              </p>
               <p class="creator">by {{ GetCreator }}</p>
             </div>
             <div @click="flipCard" class="card-action">
@@ -33,6 +45,7 @@
           showForm = true;
           disableButton = false;
         "
+        v-show="!showForm"
       >
         Mau Share Teka Teki? Takan Sini!🎯
       </p>
@@ -41,48 +54,56 @@
         class="teka-form animate__animated animate__bounceIn"
       >
         <form novalidate @submit.prevent="submitTekaTeki">
-          <label for="soalan">Soalan</label>
-          <textarea
-            name="soalan"
-            placeholder="Contoh: Banyak banyak 🍔..."
-            id="soalan"
-            cols="30"
-            rows="10"
-            v-model="proposedTeka.soalan"
-            required
-          ></textarea>
-          <p v-show="errorMessage.soalan" class="red-text">
-            {{ errorMessage.soalan }}
-          </p>
+          <div class="soalan">
+            <label for="soalan">Soalan</label>
+            <textarea
+              name="soalan"
+              placeholder="Contoh: Banyak banyak 🍔..."
+              id="soalan"
+              cols="30"
+              rows="10"
+              v-model="proposedTeka.soalan"
+              required
+            ></textarea>
+            <p v-show="errorMessage.soalan" class="red-text">
+              {{ errorMessage.soalan }}
+            </p>
+          </div>
 
-          <label for="jawapan">Jawapan</label>
-          <textarea
-            name="jawapan"
-            placeholder="Contoh: Apanahhh😜"
-            id="jawapan"
-            cols="30"
-            rows="10"
-            v-model="proposedTeka.jawapan"
-            required
-          ></textarea>
-          <p v-show="errorMessage.jawapan" class="red-text">
-            {{ errorMessage.jawapan }}
-          </p>
+          <div class="soalan">
+            <label for="jawapan">Jawapan</label>
+            <textarea
+              name="jawapan"
+              placeholder="Contoh: Apanahhh😜"
+              id="jawapan"
+              cols="30"
+              rows="10"
+              v-model="proposedTeka.jawapan"
+              required
+            ></textarea>
+            <p v-show="errorMessage.jawapan" class="red-text">
+              {{ errorMessage.jawapan }}
+            </p>
+          </div>
 
-          <label for="name">Nick Name</label>
-          <input
-            type="text"
-            placeholder="Contoh: Lord 🥦"
-            name="name"
-            id="name"
-            v-model="proposedTeka.creator"
-            required
-          />
-          <p v-show="errorMessage.creator" class="red-text">
-            {{ errorMessage.creator }}
-          </p>
+          <div class="soalan">
+            <label for="name">Nick Name</label>
+            <input
+              type="text"
+              placeholder="Contoh: Lord 🥦"
+              name="name"
+              id="name"
+              v-model="proposedTeka.creator"
+              required
+            />
+            <p v-show="errorMessage.creator" class="red-text">
+              {{ errorMessage.creator }}
+            </p>
+          </div>
 
-          <button type="submit" :disabled="disableButton">Share!</button>
+          <button type="submit" class="btn" :disabled="disableButton">
+            Share!
+          </button>
         </form>
       </div>
       <p class="green-text" v-show="successMessage">{{ successMessage }}</p>
@@ -120,6 +141,7 @@ export default {
       disableButton: false,
       successMessage: "",
       seeds: null,
+      isLatest: true,
     };
   },
   created() {
@@ -132,12 +154,8 @@ export default {
         .onSnapshot((document) => {
           this.tekateki = document.data().tekateki;
           this.tekaTeki = this.tekateki.approved;
-          this.index = Math.floor(Math.random() * this.tekaTeki.length);
-          this.seeds = [];
-          for (let index = 0; index < this.tekaTeki.length; index++) {
-            this.seeds.push(index);
-          }
-          this.seeds = this.suffle(this.seeds);
+
+          this.sort("latest");
         });
     },
     async submitTekaTeki() {
@@ -186,6 +204,9 @@ export default {
       if (!this.isFlipped) {
         setTimeout(() => {
           this.index++;
+          if (this.index == this.tekaTeki.length) {
+            this.index = 0;
+          }
         }, 500);
       }
     },
@@ -207,6 +228,28 @@ export default {
       }
 
       return array;
+    },
+    sort(sortBy) {
+      let sort = {
+        latest: () => {
+          this.seeds.reverse();
+        },
+        random: () => {
+          this.seeds = this.suffle(this.seeds);
+        },
+      };
+
+      this.seeds = [];
+      for (let index = 0; index < this.tekaTeki.length; index++) {
+        this.seeds.push(index);
+      }
+
+      sort[sortBy]();
+    },
+    changeSort(sortBy) {
+      sortBy == "latest" ? (this.isLatest = true) : (this.isLatest = false);
+      this.sort(sortBy);
+      this.index = 0;
     },
   },
   computed: {
@@ -230,7 +273,7 @@ export default {
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .flip-card {
   background-color: transparent;
-  margin: auto;
+  margin: 2rem auto;
   width: 80%;
   height: 25rem;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
@@ -299,14 +342,37 @@ export default {
 }
 
 .form-container {
+  margin-top: 4rem;
   .share {
     cursor: pointer;
     text-decoration: underline;
     color: lightskyblue;
+    margin: 4rem auto;
+    border: 1px solid lightblue;
+    width: 15rem;
+    border-radius: 1rem;
+    padding: 1rem;
   }
   .teka-form {
     max-width: 15rem;
     margin: auto;
+    margin-bottom: 2rem;
+  }
+  .soalan {
+    padding-bottom: 2rem;
+  }
+}
+
+.susun {
+  margin-top: 2rem;
+  span {
+    padding: 1rem;
+  }
+}
+.active {
+  color: lightsalmon;
+  &::after {
+    content: "🍕";
   }
 }
 </style>
