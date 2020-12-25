@@ -38,6 +38,7 @@
       <div class="row">
         <button
           class="btn"
+          type="button"
           @click="gengs[side].push({ id: '', name: '', msg: '' })"
         >
           Add New
